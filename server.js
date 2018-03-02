@@ -11,7 +11,7 @@ var axios = require("axios");
 var db = require("./models");
 
 //set server to run on port 3000
-var PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 //Init express
 
@@ -25,14 +25,17 @@ app.use(bodyParser.urlencoded({ extended:false}));
 app.use(express.static("public"));
 
 mongoose.Promise = Promise;
-mongoose.connect("mongodb://localhost/scrapesohard", {
-  useMongoClient: true
-});
+mongoose.connect(
+  process.env.MONGODB_URI || "mongodb://localhost/reactreadinglist",
+  {
+    useMongoClient: true
+  }
+);
 
 // Routes
 
 // A GET route for scraping the investopedia website
-app.get("/scrape", function(req, res) {
+app.get("/", function(req, res) {
     // First, we grab the body of the html with request
     axios.get("https://www.investopedia.com/news/").then(function(response) {
       // Then, we load that into cheerio and save it to $ for a shorthand selector
