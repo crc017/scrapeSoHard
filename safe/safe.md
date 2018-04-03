@@ -1,0 +1,1 @@
+mongodb://heroku_42m12dwd:q4dc5v38t1c90gpe2rcei9d33b@ds247587.mlab.com:47587/heroku_42m12dwd
