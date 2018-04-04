@@ -3,11 +3,21 @@ $.getJSON("/articles", function(data) {
     // For each one
     for (var i = 0; i < data.length; i++) {
       // Display the information on the page
-      $("#articles").append("<h4 data-id='" + data[i]._id + "'>" + data[i].title + "</h4>" + "<a href='https://www.investopedia.com/" + data[i].link + "'>" + data[i].link + "</a>" + "<br/>" + "<br/>");
+      $("#articles").append("<h4 data-id='" + data[i]._id + "'><a href='https://www.investopedia.com/" + data[i].link + "'>" + [i+1] + '.'+'  '+' ' + data[i].title + "</a></h4>" + "<br/>" + "<br/>");
     }
   });
   
   
+  $("#scrapeButton").on("click", function(){
+    $.ajax({
+      method: "GET",
+      url: "/scrape"
+    })
+    .done(function(){
+      $("#scrapeButton").animate({'color': 'rgb:(137,205,164)'}, 20000);
+    })
+  });
+
   // Whenever someone clicks a p tag
   $(document).on("click", "h4", function() {
     // Empty the notes from the note section
